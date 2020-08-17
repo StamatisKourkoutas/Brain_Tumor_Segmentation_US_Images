@@ -1,1 +1,4 @@
 datasets/
+RAS/models/
+RAS/results/
+RAS/__pycache__/

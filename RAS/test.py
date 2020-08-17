@@ -8,25 +8,32 @@ import cv2
 from RAS import RAS
 from data import test_dataset
 
-parser = argparse.ArgumentParser()
-parser.add_argument('--testsize', type=int, default=352, help='testing size')
-opt = parser.parse_args()
+#parser = argparse.ArgumentParser()
+#parser.add_argument('--testsize', type=int, default=352, help='testing size')
+#opt = parser.parse_args()
 
-dataset_path = '/home/stamatis/Desktop/Imperial Thesis/Thesis code/data/DUTS/'
+# Class Args is used instead of parser so that this code can also work in a jupyter notebook enviroment.
+class Args:
+    testsize = 448
+
+args=Args()
+opt = args
+
+dataset_path = '../datasets/'
 
 model = RAS()
-model.load_state_dict(torch.load('./models/RAS.v1.pth'))
+model.load_state_dict(torch.load('./RAS/models/trainingnew/RAS.v1.30.pth'))
 
 model.cuda()
 model.eval()
 
-test_datasets = ['DUTS']
+test_datasets = ['testingnew']
 
 for dataset in test_datasets:
-    save_path = '/home/stamatis/Desktop/Imperial Thesis/Thesis code/data/evaluation/SaliencyMaps/' + dataset + '/RAS-v1/'
+    save_path = 'RAS/results/'+dataset+'/'
     if not os.path.exists(save_path):
         os.makedirs(save_path)
-    image_root = dataset_path + dataset + '/imgs/'
+    image_root = dataset_path + dataset + '/image/'
     test_loader = test_dataset(image_root, opt.testsize)
     time_t = 0.0
     for i in range(test_loader.size):
@@ -41,6 +48,6 @@ for dataset in test_datasets:
         res = res.sigmoid().data.cpu().numpy().squeeze()
         res = (res - res.min()) / (res.max() - res.min() + 1e-8)
         res = 255 * res
-        cv2.imwrite(os.path.join(save_path + name[:-4] + '.png'), res)
+        cv2.imwrite(os.path.join(save_path + name), res)
     fps = test_loader.size / time_t
     print('FPS is %f' %(fps))

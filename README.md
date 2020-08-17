@@ -7,11 +7,23 @@
 
     **`pip install -r requirements.txt`**
 
+## Usage
+
+### RAS network
+
+To train a RAS network specify the train dataset path in RAS/train.py folder and run
+
+    **`python3 train.py`**
+
+To test a RAS model run the test dataset path in RAS/test.py folder and run
+
+    **`python3 test.py`**
+
 ## Acknowledgements
 
 The code for each model is taken from the code repositories of the authors that proposed each model respectively.
 
-[RAS](https://https://github.com/ShuhanChen/RAS-pytorch)[1]
+[RAS](https://github.com/ShuhanChen/RAS-pytorch)[1]
 [CPD](https://github.com/wuzhe71/CPD)[2]
 [F3Net](https://github.com/weijun88/F3Net)[3].
 
