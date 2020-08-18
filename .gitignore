@@ -2,3 +2,9 @@ datasets/
 RAS/models/
 RAS/results/
 RAS/__pycache__/
+CPD/models/
+CPD/results/
+CPD/__pycache__/
+CPD/vgg16-397923af.pth
+F3Net/models
+F3Net/results

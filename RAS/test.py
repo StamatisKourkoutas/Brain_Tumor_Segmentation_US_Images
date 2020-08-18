@@ -22,7 +22,7 @@ opt = args
 dataset_path = '../datasets/'
 
 model = RAS()
-model.load_state_dict(torch.load('./RAS/models/trainingnew/RAS.v1.30.pth'))
+model.load_state_dict(torch.load('./models/training2_3_11_15/RAS.v1.30.pth'))
 
 model.cuda()
 model.eval()
@@ -30,7 +30,7 @@ model.eval()
 test_datasets = ['testingnew']
 
 for dataset in test_datasets:
-    save_path = 'RAS/results/'+dataset+'/'
+    save_path = './results/'+dataset+'/'
     if not os.path.exists(save_path):
         os.makedirs(save_path)
     image_root = dataset_path + dataset + '/image/'

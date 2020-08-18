@@ -90,7 +90,7 @@ def train(train_loader, model, optimizer, epoch):
             print('Loss4: %10.4f' % (loss4.data / opt.batchsize))
             print('Loss5: %10.4f' % (loss5.data / opt.batchsize))
 
-    save_path = 'RAS models/'
+    save_path = './models/'
 
     if not os.path.exists(save_path):
         os.makedirs(save_path)
