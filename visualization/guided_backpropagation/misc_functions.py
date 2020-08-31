@@ -12,6 +12,9 @@ import matplotlib.cm as mpl_color_map
 import torch
 from torch.autograd import Variable
 from torchvision import models
+
+import sys
+sys.path.insert(1, '../../CPD')
 from CPD_ResNet_models import CPD_ResNet
 
 def convert_to_grayscale(im_as_arr):
@@ -160,8 +163,8 @@ def get_params():
         file_name_to_export (string): File name to export the visualizations
         pretrained_model(Pytorch model): Model to use for the operations
     """
-    img_path = '../datasets/testingnew/image/case6000000000000000.jpeg'
-    mask_path = '/home/stamatis/Desktop/Imperial Thesis/Brain_Tumor_Segmentation_US_Images/CPD/results/CPD_ResNet/training2_3_9_15/24/case6000000000000000.jpeg'
+    img_path = '../../datasets/testingnew/image/case6000000000000000.jpeg'
+    mask_path = '../../CPD/results/CPD_ResNet/training2_3_9_15/24/case6000000000000000.jpeg'
     file_name_to_export = img_path[img_path.rfind('/')+1:img_path.rfind('.')]
     # Read image
     original_image = Image.open(img_path).convert('RGB')
@@ -174,7 +177,7 @@ def get_params():
     # Define model
     #pretrained_model = models.wide_resnet50_2(pretrained=True) # For ResNet pretrained model
     pretrained_model = CPD_ResNet()				# For CPD pretrained model
-    pretrained_model.load_state_dict(torch.load('./models/CPD_ResNet/training2_3_9_15/CPD.pth.24'))
+    pretrained_model.load_state_dict(torch.load('../../CPD/models/CPD_ResNet/training2_3_9_15/CPD.pth.24'))
 
     return (original_image,
             prep_img,

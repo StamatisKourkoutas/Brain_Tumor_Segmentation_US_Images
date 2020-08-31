@@ -8,6 +8,6 @@ CPD/__pycache__/
 CPD/vgg16-397923af.pth
 F3Net/models
 F3Net/results
-Visualizations/
+visualization/guided_backpropagation/results/
 pytorch-cnn-visualizations-master/
 CRF/crf_results/
