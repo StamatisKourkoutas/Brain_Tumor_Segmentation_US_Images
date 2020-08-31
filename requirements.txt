@@ -3,3 +3,6 @@ torchvision
 opencv-python
 scipy
 imageio
+notebook
+pydensecrf
+scikit-image

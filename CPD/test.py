@@ -15,23 +15,21 @@ from data import test_dataset
 #parser.add_argument('--is_ResNet', type=bool, default=False, help='VGG or ResNet backbone')
 #opt = parser.parse_args()
 
-### MyCode
 class Args:
     testsize = 448
     is_ResNet = True
 
 args=Args()
 opt = args
-###
 
 dataset_path = '../datasets/testingnew'
 
 if opt.is_ResNet:
     model = CPD_ResNet()
-    model.load_state_dict(torch.load('./models/CPD_ResNet/training2_3_11_15/CPD.pth.29'))
+    model.load_state_dict(torch.load('./models/CPD_ResNet/trainingnew/CPD.pth.39'))
 else:
     model = CPD_VGG()
-    model.load_state_dict(torch.load('./models/CPD_VGG/training2_3_9_15/CPD.pth.19'))
+    model.load_state_dict(torch.load('./models/CPD_VGG/trainingnew/CPD.pth.39'))
 
 model.cuda()
 model.eval()

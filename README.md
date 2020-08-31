@@ -3,21 +3,44 @@
 ## Installation
 
 - Clone this repository locally.
+- It is better to use a python virtual environment to install all the necessary packages.
+- To avoid any problems, update pip by running
+
+    **`pip install --upgrade pip`**
+
 - Install all the necessary packages by running
 
     **`pip install -r requirements.txt`**
 
 ## Usage
 
-### RAS network
+### RAS Network
 
-To train a RAS network specify the train dataset path in RAS/train.py folder and run
+To train a RAS network model specify the train dataset path in RAS/train.py folder and run
 
     **`python3 train.py`**
 
-To test a RAS model run the test dataset path in RAS/test.py folder and run
+To test a RAS model set the test dataset path in RAS/test.py folder and run
 
     **`python3 test.py`**
+
+### CPD Network
+
+To train a CPD model specify the train dataset paths (image_root, gt_root) in CPD/train.py folder and run
+
+    **`python3 train.py`**
+
+To test a CPD model set the dataset_path in CPD/test.py folder and run
+
+    **`python3 test.py`**
+
+### F3Net
+
+To train a F3Net model use the notebook file in F3Net and run the cells in the order they appear to install required packages.
+
+### CRF
+
+To run CRF run the notebook file  CRF/CRF.ipynb
 
 ## Acknowledgements
 
