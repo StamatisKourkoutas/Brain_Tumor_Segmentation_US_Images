@@ -30,7 +30,7 @@ class Args:
     batchsize = 10
     trainsize = 448
     clip = 0.5
-    is_ResNet = False
+    is_ResNet = True
     decay_rate = 0.1
     decay_epoch = 25
     transfer_learning = False

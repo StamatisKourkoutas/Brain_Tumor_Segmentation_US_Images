@@ -1,7 +1,7 @@
 """
-Created on Thu Oct 21 11:09:09 2017
-
-@author: Utku Ozbulak - github.com/utkuozbulak
+Code taken from:
+    https://github.com/utkuozbulak/pytorch-cnn-visualizations
+and is altered as required.
 """
 import os
 import copy
@@ -48,6 +48,7 @@ def save_gradient_images(gradient, file_name):
     # Normalize
     gradient = gradient - gradient.min()
     gradient /= gradient.max()
+
     # Save image
     path_to_file = os.path.join('../results', file_name + '.jpg')
     save_image(gradient, path_to_file)
@@ -93,7 +94,7 @@ def save_image(im, path):
     im.save(path)
 
 
-def preprocess_image(pil_im, resize_im=True):
+def preprocess_image(pil_im, mode, resize_im=True):
     """
         Processes image for CNNs
 
@@ -103,7 +104,7 @@ def preprocess_image(pil_im, resize_im=True):
     returns:
         im_as_var (torch variable): Variable that contains processed float tensor
     """
-    # mean and std list for channels (Imagenet)
+
     mean = [0.485, 0.456, 0.406]
     std = [0.229, 0.224, 0.225]
 
@@ -125,10 +126,15 @@ def preprocess_image(pil_im, resize_im=True):
 
     im_as_arr = im_as_arr.transpose(2, 0, 1)  # Convert array to D,W,H
     # Normalize the channels
-    for channel, _ in enumerate(im_as_arr):
-        im_as_arr[channel] /= 255
-        im_as_arr[channel] -= mean[channel]
-        im_as_arr[channel] /= std[channel]
+    if (mode=="img"):
+        for channel, _ in enumerate(im_as_arr):
+            im_as_arr[channel] /= 255
+            im_as_arr[channel] -= mean[channel]
+            im_as_arr[channel] /= std[channel]
+    elif (mode=="mask"):
+        im_as_arr[im_as_arr<128] = 0
+        im_as_arr[im_as_arr>=128] = 1
+
     # Convert to float tensor
     im_as_ten = torch.from_numpy(im_as_arr).float()
     # Add one more channel to the beginning. Tensor shape = 1,3,224,224
@@ -136,7 +142,6 @@ def preprocess_image(pil_im, resize_im=True):
     # Convert to Pytorch variable
     im_as_var = Variable(im_as_ten, requires_grad=True)
     return im_as_var
-
 
 
 def get_positive_negative_saliency(gradient):
@@ -163,20 +168,20 @@ def get_params():
         file_name_to_export (string): File name to export the visualizations
         pretrained_model(Pytorch model): Model to use for the operations
     """
-    img_path = '../../datasets/testingnew/image/case6000000000000000.jpeg'
-    mask_path = '../../CPD/results/CPD_ResNet/training2_3_9_15/24/case6000000000000000.jpeg'
+    img_path = '../../datasets/testingnew/image/case6000000000000060.jpeg'
+    mask_path = '../../datasets/testingnew/mask/case6000000000000060.jpeg'
     file_name_to_export = img_path[img_path.rfind('/')+1:img_path.rfind('.')]
     # Read image
     original_image = Image.open(img_path).convert('RGB')
     # Process image
-    prep_img = preprocess_image(original_image)
+    prep_img = preprocess_image(original_image, "img")
     # Read mask
     original_mask = Image.open(mask_path).convert('L')
     # Process mask
-    target_mask = preprocess_image(original_mask)
+    target_mask = preprocess_image(original_mask, "mask")
     # Define model
     #pretrained_model = models.wide_resnet50_2(pretrained=True) # For ResNet pretrained model
-    pretrained_model = CPD_ResNet()				# For CPD pretrained model
+    pretrained_model = CPD_ResNet()				# For CPD-R pretrained model
     pretrained_model.load_state_dict(torch.load('../../CPD/models/CPD_ResNet/training2_3_9_15/CPD.pth.24'))
 
     return (original_image,

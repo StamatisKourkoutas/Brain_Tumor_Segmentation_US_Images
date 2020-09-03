@@ -22,7 +22,7 @@ opt = args
 dataset_path = '../datasets/'
 
 model = RAS()
-model.load_state_dict(torch.load('./models/training2_3_11_15/RAS.v1.30.pth'))
+model.load_state_dict(torch.load('./models/training2_3_9_15/RAS.v1.30.pth'))
 
 model.cuda()
 model.eval()

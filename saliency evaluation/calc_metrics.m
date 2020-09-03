@@ -2,15 +2,8 @@
 %of one image.
 function Metrics = calc_metrics(sMap,gtMap,gtsize)
 
-%sumLabel =  2 * mean(sMap(:)) ;
-%if ( sumLabel > 1 )                 %Threshold for extracting saliency map.
-%    sumLabel = 1;
-%end
-
 Label3 = zeros( gtsize );
 Label3( sMap>=0.5 ) = 1;           %Saliency map with ones and zeros.
-
-%imwrite(Label3,"../../out.png")
 
 P = length( find( Label3==1 ) );        %Number of predicted pixels as positives in saliency map.
 LabelAnd = Label3 & gtMap;              %True positives with 1.
@@ -25,7 +18,6 @@ FN = N - TN;                            %False Negatives.
 
 T = length( find ( gtMap==1 ) );        %Number of tumor pixels
 B = length( find ( gtMap==0 ) );        %Number of background pixels
-%fprintf('%.3f',T/(T+B));
 
 if TP == 0
     Precision = 0;
@@ -37,7 +29,8 @@ else
     Precision = TP/P;
     Recall = TP/num_obj;
     F1_score = ((2 * Precision * Recall)/(Precision + Recall));
-    FmeasureF = ((1.3 * Precision * Recall) / ( .3 * Precision + Recall ) ); %Fmeasure general formula with b weight
+    %Fmeasure general formula with b weight
+    FmeasureF = ((1.3 * Precision * Recall) / ( .3 * Precision + Recall ) );
 end
 
 Accuracy = 0;
