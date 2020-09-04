@@ -7,11 +7,10 @@ import random
 class SalObjDataset(data.Dataset):
     def __init__(self, image_root, gt_root, trainsize):
         self.trainsize = trainsize
-        self.images = [image_root + f for f in os.listdir(image_root)] #MyCode
+        self.images = [image_root + f for f in os.listdir(image_root)]
         self.gts = [gt_root + f for f in os.listdir(gt_root)]
         self.images = sorted(self.images)
         self.gts = sorted(self.gts)
-        #self.filter_files()
         self.size = len(self.images)
         self.img_transform = transforms.Compose([
             transforms.Resize((self.trainsize, self.trainsize)),
