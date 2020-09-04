@@ -46,7 +46,9 @@
 
 ### CRF
 
-- To run the CRF post-processing method, run the notebook file CRF/CRF.ipynb
+- To run the CRF post-processing method, specify the imgs_path of a folder with US images and the masks_path of a folder with the segmentations produced by a deep CNN in CRF/crf.py and run
+
+    **`python3 crf.py`**
 
 ### Visualisation
 
