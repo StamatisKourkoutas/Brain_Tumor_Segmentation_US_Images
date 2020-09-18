@@ -10,5 +10,4 @@ F3Net/models
 F3Net/results
 visualization/results/
 visualization/guided_backpropagation/__pycache__/
-pytorch-cnn-visualizations-master/
 CRF/crf_results/

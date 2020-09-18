@@ -1,5 +1,9 @@
 # Brain Tumor Segmentation in US images
 
+This code was developed, in scope of my Thesis project, during the last term of my **MSc in Computing (Software Engineering)** studies at **Imperial College London**
+
+**Project Description:** Found in the included [report](./report.pdf)<br />
+
 ## Installation
 
 - Clone this repository locally.
